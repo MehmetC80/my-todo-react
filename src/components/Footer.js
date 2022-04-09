@@ -1,9 +1,9 @@
-export const Footer = () => {
-  const date = new Date();
-
+export const Footer = ({ length }) => {
   return (
-    <footer>
-      <p>published by mehmet cetinkaya {date.getFullYear}</p>
+    <footer className='footer'>
+      <p>
+        Anzahl Todos {length} {length === 1 ? 'Todo' : 'Todos'}
+      </p>
     </footer>
   );
 };

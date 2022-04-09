@@ -1,8 +1,10 @@
-export const Header = () => {
+export const Header = ({ title, subTitle }) => {
   return (
     <header className='header'>
-      <h1>PNA</h1>
-      <h2>Personal Note App</h2>
+      <h1>{title}</h1>
+      <h2>{subTitle}</h2>
     </header>
   );
 };
+
+Header.defaultProps = { title: 'Default Title', subTitle: '' };
