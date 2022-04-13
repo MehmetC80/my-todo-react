@@ -2,26 +2,32 @@ import { Header } from './components/Header';
 import { Content } from './components/Content';
 import { Footer } from './components/Footer';
 import { useState } from 'react';
-
+import { AddItem } from './components/AddItem';
 function App() {
   const [items, setItems] = useState([
     {
       id: 1,
       checked: false,
-      item: 'item 01',
+      description: 'item 01',
     },
     {
       id: 2,
       checked: false,
-      item: 'item 02',
+      description: 'item 02',
     },
 
     {
       id: 3,
       checked: false,
-      item: 'item 03',
+      description: 'item 03',
     },
   ]);
+
+  const addItem = (item) => {
+    const id = item.length ? items[item.length - 1].id + 1 : 1;
+    const myNewItem = { id, checked: false, description };
+    const listItem = [...items, myNewItem];
+  };
 
   const handleCheck = (id) => {
     const listItems = items.map((item) =>
@@ -37,9 +43,21 @@ function App() {
     localStorage.setItem('shoppinglist', JSON.stringify());
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!newItem) return;
+
+    setItems('');
+  };
+
   return (
     <div className='app'>
       <Header title='PNA' subTitle='Personal Note App' />
+      <AddItem
+        handleSubmit={handleSubmit}
+        newItem={newItem}
+        setNewItem={setNewItem}
+      />
       <Content
         items={items}
         handleDelete={handleDelete}
