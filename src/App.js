@@ -6,24 +6,9 @@ import { useState } from 'react';
 import { AddItem } from './components/AddItem';
 
 function App() {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      checked: false,
-      description: 'item 01',
-    },
-    {
-      id: 2,
-      checked: false,
-      description: 'item 02',
-    },
-
-    {
-      id: 3,
-      checked: false,
-      description: 'item 03',
-    },
-  ]);
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem('itemlist'))
+  );
 
   const [newItem, setNewItem] = useState('');
 
