@@ -4,6 +4,7 @@ import { Content } from './components/Content';
 import { Footer } from './components/Footer';
 import { useState } from 'react';
 import { AddItem } from './components/AddItem';
+import { SearchItem } from './components/SearchItem';
 
 function App() {
   const [items, setItems] = useState(
@@ -11,6 +12,8 @@ function App() {
   );
 
   const [newItem, setNewItem] = useState('');
+
+  const [search, setSearch] = useState('');
 
   const setAndSaveItems = (newItems) => {
     setItems(newItems);
@@ -53,10 +56,13 @@ function App() {
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}
       />
+      <SearchItem search={search} setSearch={setSearch} />
       <Content
         handleCheck={handleCheck}
         handleDelete={handleDelete}
-        items={items}
+        items={items.filter((item) =>
+          item.description.toLowerCase().includes(search.toLowerCase())
+        )}
       />
       <Footer length={items.length} />
     </div>
