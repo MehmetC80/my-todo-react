@@ -8,4 +8,4 @@ export const Header = ({ title, subTitle }) => {
   );
 };
 
-Header.defaultProps = { title: 'Default Title', subTitle: '' };
+Header.defaultProps = { title: 'PNA', subTitle: '' };
