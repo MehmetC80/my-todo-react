@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Content } from './components/Content';
 import { Footer } from './components/Footer';
 import { useState } from 'react';
+import { AddItem } from './components/AddItem';
 
 function App() {
   const [items, setItems] = useState([
@@ -24,38 +25,49 @@ function App() {
     },
   ]);
 
+  const [newItem, setNewItem] = useState('');
+
+  const setAndSaveItems = (newItems) => {
+    setItems(newItems);
+    localStorage.setItem('itemlist', JSON.stringify(newItems));
+  };
+
   const handleCheck = (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
-
-    setItems(listItems);
-    localStorage.setItem('itemlist', JSON.stringify(listItems));
+    setAndSaveItems(listItems);
   };
 
   const handleDelete = (id) => {
     const listItems = items.filter((item) => item.id !== id);
 
-    setItems(listItems);
-    localStorage.setItem('itemlist', JSON.stringify(listItems));
+    setAndSaveItems(listItems);
   };
 
-  // const addItem = (item) => {
-  //   const id = item.length ? items[item.length - 1].id + 1 : 1;
-  //   const myNewItem = { id, checked: false, description };
-  //   const listItem = [...items, myNewItem];
-  // };
+  const addItem = (description) => {
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+    const myNewItem = { id, checked: false, description };
+    const listItems = [...items, myNewItem];
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (!newItem) return;
+    setAndSaveItems(listItems);
+  };
 
-  //   setItems('');
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!newItem) return;
+    addItem(newItem);
+    setNewItem('');
+  };
 
   return (
     <div className='app'>
       <Header title='PNA' subTitle='Personal Note App' />
+      <AddItem
+        newItem={newItem}
+        setNewItem={setNewItem}
+        handleSubmit={handleSubmit}
+      />
       <Content
         handleCheck={handleCheck}
         handleDelete={handleDelete}
