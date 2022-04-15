@@ -1,3 +1,4 @@
+import '../styles/header.css';
 export const Header = ({ title, subTitle }) => {
   return (
     <header className='header'>
