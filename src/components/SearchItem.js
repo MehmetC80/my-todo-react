@@ -9,6 +9,7 @@ export const SearchItem = ({ search, setSearch }) => {
         type='text'
         role='searchbox'
         placeholder='Todo suchen'
+        autoComplete='off'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

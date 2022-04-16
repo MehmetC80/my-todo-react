@@ -13,6 +13,7 @@ export const AddItem = ({ newItem, setNewItem, handleSubmit }) => {
         id='addItem'
         type='text'
         placeholder='Todo hinzufügen'
+        autoComplete='off'
         required
         value={newItem}
         onChange={(e) => setNewItem(e.target.value)}
