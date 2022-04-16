@@ -5,7 +5,7 @@ import { Content } from './components/Content';
 import { Footer } from './components/Footer';
 import { AddItem } from './components/AddItem';
 import { SearchItem } from './components/SearchItem';
-
+import { apiRequest } from './components/apiRequest';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -27,8 +27,6 @@ function App() {
         const response = await fetch(ApiUrl);
         if (!response.ok) throw Error('Die Daten wurden nicht empfangen');
         const listItems = await response.json();
-
-        console.log(listItems);
         setItems(listItems);
         setFetchError(null);
       } catch (err) {
@@ -57,12 +55,23 @@ function App() {
     setItems(listItems);
   };
 
-  const addItem = (description) => {
+  const addItem = async (description) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const myNewItem = { id, checked: false, description };
     const listItems = [...items, myNewItem];
 
     setItems(listItems);
+
+    const postOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(myNewItem),
+    };
+
+    const result = await apiRequest(ApiUrl, postOptions);
+    if (result) setFetchError(result);
   };
 
   const handleSubmit = (e) => {

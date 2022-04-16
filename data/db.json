@@ -4,6 +4,11 @@
       "id": 1,
       "checked": false,
       "description": "JavaScript lernen"
+    },
+    {
+      "id": 2,
+      "checked": false,
+      "description": "React lernen"
     }
   ]
 }
