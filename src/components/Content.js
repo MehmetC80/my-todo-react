@@ -4,7 +4,7 @@ import { ItemList } from './ItemList';
 
 export const Content = ({ items, handleDelete, handleCheck }) => {
   return (
-    <main className='main'>
+    <>
       {items.length ? (
         <ItemList
           items={items}
@@ -16,6 +16,6 @@ export const Content = ({ items, handleDelete, handleCheck }) => {
           Deine Liste ist Leer!
         </p>
       )}
-    </main>
+    </>
   );
 };
